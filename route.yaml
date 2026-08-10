@@ -1,0 +1,91 @@
+wantType:
+  metadata:
+    name: route
+    title: Route Shown
+    description: |
+      Draws the way from one place to another on a map, for walking, cycling or
+      driving.
+
+      Nothing is computed here. The want holds the question — where from, where
+      to, and how you are travelling — and the card answers it, geocoding the
+      two ends with Nominatim and asking Valhalla for the line between them,
+      both OpenStreetMap services that need no API key. That is deliberate: a
+      key is one more thing to expire, and this one did.
+
+      Transit is not offered. The routers that do it well are the paid ones, and
+      transit_search already answers that question properly for Japan.
+    version: '1.0'
+    category: transport
+    pattern: independent
+    labels:
+      # Drawn on the canvas as an arrow, like transit_search: two ends and a
+      # line between them is what this want IS.
+      form-type: arrow
+      form-style: road
+      # A thing dropped on this want is somewhere you want to GO.
+      seed-param: to
+      riffable: source
+      # The card carries its own controls (swap the ends, change the mode), so
+      # Enter on it is meant to reach them.
+      user-control: "true"
+      category-icon: Route
+      category-bg-light: "linear-gradient(160deg, #bbf7d0 0%, #ecfdf5 100%)"
+      category-bg-dark: "linear-gradient(160deg, #166534 0%, #052e16 100%)"
+
+  parameters:
+    - name: from
+      description: Starting place — a station, an address, anything Nominatim can find
+      type: string
+      required: true
+      example: 国分寺駅
+      subType: station
+
+    - name: to
+      description: Destination
+      type: string
+      required: true
+      example: 中野坂上駅
+      subType: station
+
+    - name: mode
+      description: How you are travelling
+      type: string
+      default: walking
+      required: false
+      validation:
+        enum:
+          - walking
+          - cycling
+          - driving
+      example: cycling
+
+  state:
+    - name: from
+      description: Starting place, as asked for
+      type: string
+      persistent: true
+      label: current
+    - name: to
+      description: Destination, as asked for
+      type: string
+      persistent: true
+      label: current
+    - name: mode
+      description: Travel mode
+      type: string
+      persistent: true
+      label: current
+      initialValue: walking
+
+  examples:
+    - title: Cycle home from the station
+      description: The way from 国分寺駅 to 中野坂上駅 by bicycle
+      want:
+        metadata:
+          name: route-home
+          type: route
+        spec:
+          params:
+            from: 国分寺駅
+            to: 中野坂上駅
+            mode: cycling
