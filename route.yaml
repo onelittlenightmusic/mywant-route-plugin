@@ -28,7 +28,10 @@ wantType:
       # The card carries its own controls (swap the ends, change the mode), so
       # Enter on it is meant to reach them.
       user-control: "true"
-      category-icon: Route
+      # type-icon, not category-icon: `transport` already belongs to
+      # transit_search, and claiming the category's icon here changed the glyph
+      # on a want type that has nothing to do with this one.
+      type-icon: Route
       category-bg-light: "linear-gradient(160deg, #bbf7d0 0%, #ecfdf5 100%)"
       category-bg-dark: "linear-gradient(160deg, #166534 0%, #052e16 100%)"
 
