@@ -77,6 +77,20 @@ wantType:
       label: current
       initialValue: walking
 
+    # Where you are, as told by something that knows — a location want, most
+    # obviously. One slot serving both uses: the card drops a pin on it, and
+    # "現在地から" copies it into `from` and re-routes. It is deliberately not
+    # `from` itself: overwriting the question every time the phone moved would
+    # make the card impossible to read, and a route you asked for should stay
+    # the route you asked for until you say otherwise.
+    - name: here
+      description: Current position as {lat,lng}, imported from a location want
+      type: object
+      subType: location_coordinate
+      persistent: true
+      label: current
+      importable: true
+
   examples:
     - title: Cycle home from the station
       description: The way from 国分寺駅 to 中野坂上駅 by bicycle
