@@ -37,18 +37,26 @@ wantType:
 
   parameters:
     - name: from
-      description: Starting place — a station, an address, anything Nominatim can find
+      description: |
+        Where the way starts: a station, an address, a place you have named, or
+        a coordinate. A name you have given somewhere ("自宅") is resolved from
+        your own places before anyone is asked to look it up.
       type: string
       required: true
       example: 国分寺駅
+      # Recorded as a station, which is what a name typed in here usually is,
+      # and takes the other ways of saying "somewhere" as well. See want-spec's
+      # ParameterDef.Accepts.
       subType: station
+      accepts: [place, location_coordinate, address, location]
 
     - name: to
-      description: Destination
+      description: Destination — same as `from`; anything that names a place.
       type: string
       required: true
       example: 中野坂上駅
       subType: station
+      accepts: [place, location_coordinate, address, location]
 
     - name: mode
       description: How you are travelling
