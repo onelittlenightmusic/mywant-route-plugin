@@ -50,6 +50,21 @@ wantType:
       subType: station
       accepts: [place, location_coordinate, address, location]
 
+    - name: via
+      description: |
+        Places to go through on the way, in the order you give them. Each one is
+        named the same way `from` and `to` are.
+
+        The order is yours and is not improved on: a way through three places is
+        the way you asked for, not the shortest tour of them. Valhalla will
+        optimise an order if asked, and asking would mean the line on the card
+        stopped answering the question that was typed.
+      type: array
+      required: false
+      example: [新宿駅, 渋谷駅]
+      subType: station
+      accepts: [place, location_coordinate, address, location]
+
     - name: to
       description: Destination — same as `from`; anything that names a place.
       type: string
@@ -81,6 +96,12 @@ wantType:
       type: string
       persistent: true
       label: current
+    - name: via
+      description: Places to go through, in order, as asked for
+      type: array
+      persistent: true
+      label: current
+
     - name: mode
       description: Travel mode
       type: string
