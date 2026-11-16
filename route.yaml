@@ -18,6 +18,7 @@ wantType:
     category: transport
     pattern: independent
     labels:
+      aliases: "route,経路,ルート"
       # Drawn on the canvas as an arrow, like transit_search: two ends and a
       # line between them is what this want IS.
       form-type: arrow
