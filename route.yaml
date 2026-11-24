@@ -22,9 +22,6 @@ wantType:
       # it is: the type in a few words of its own (laya-option).
       laya-option: "地図で歩き・自転車・車の道順を描く"
       aliases: "route,経路,ルート"
-      # Where to, when not said: where the person is going now, read from
-      # what they asked before (the engine's user_context.go).
-      context/to: destination
       # Drawn on the canvas as an arrow, like transit_search: two ends and a
       # line between them is what this want IS.
       form-type: arrow
@@ -44,6 +41,7 @@ wantType:
 
   parameters:
     - name: from
+      context: place.origin
       description: |
         Where the way starts: a station, an address, a place you have named, or
         a coordinate. A name you have given somewhere ("自宅") is resolved from
@@ -73,6 +71,7 @@ wantType:
       accepts: [place, location_coordinate, address, location]
 
     - name: to
+      context: place.destination
       description: Destination — same as `from`; anything that names a place.
       type: string
       required: true
@@ -81,6 +80,7 @@ wantType:
       accepts: [place, location_coordinate, address, location]
 
     - name: mode
+      context: preference.mode
       description: How you are travelling
       type: string
       default: walking
