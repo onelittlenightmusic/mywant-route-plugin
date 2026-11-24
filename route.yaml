@@ -22,6 +22,9 @@ wantType:
       # it is: the type in a few words of its own (laya-option).
       laya-option: "地図で歩き・自転車・車の道順を描く"
       aliases: "route,経路,ルート"
+      # Where to, when not said: where the person is going now, read from
+      # what they asked before (the engine's user_context.go).
+      context/to: destination
       # Drawn on the canvas as an arrow, like transit_search: two ends and a
       # line between them is what this want IS.
       form-type: arrow
