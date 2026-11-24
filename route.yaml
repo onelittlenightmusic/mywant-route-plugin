@@ -18,6 +18,9 @@ wantType:
     category: transport
     pattern: independent
     labels:
+      # What the robot reads a request against, when it asks Laya which want
+      # it is: the type in a few words of its own (laya-option).
+      laya-option: "地図で歩き・自転車・車の道順を描く"
       aliases: "route,経路,ルート"
       # Drawn on the canvas as an arrow, like transit_search: two ends and a
       # line between them is what this want IS.
@@ -136,3 +139,17 @@ wantType:
             from: 国分寺駅
             to: 中野坂上駅
             mode: cycling
+
+  # How a want of this type is asked for, in words, and what it is made with
+  # (want-spec asks): what reads requests (the robot, Laya) learns from these
+  # and is tested on them. A parameter left out is one the request does not say.
+  asks:
+    - say: "国分寺駅から中野坂上駅まで歩く道"
+      variants: ["国分寺駅から中野坂上駅まで歩いて行く道順", "国分寺駅から中野坂上駅への徒歩ルートを地図で", "国分寺駅から中野坂上駅まで歩きの経路"]
+      params: {"from": "国分寺駅", "to": "中野坂上駅", "mode": "walking"}
+    - say: "自宅から会社まで自転車のルート"
+      variants: ["自宅から会社まで自転車で行く道", "自転車で自宅から会社までの道順を地図に", "自宅から会社へ自転車の経路"]
+      params: {"from": "自宅", "to": "会社", "mode": "cycling"}
+    - say: "新宿から横浜まで車で行く経路"
+      variants: ["新宿から横浜まで車の道順", "車で新宿から横浜へのルートを地図で", "新宿から横浜までドライブの経路"]
+      params: {"from": "新宿", "to": "横浜", "mode": "driving"}
